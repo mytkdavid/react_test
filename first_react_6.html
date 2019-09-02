@@ -13,20 +13,24 @@
     <div id="example"></div>
     <!-- 以下就是包在 babel（透過進行語言翻譯）中的 React JSX 語法，babel 會將其轉為瀏覽器看的懂得 JavaScript -->
     <script type="text/babel"> 
-      var MyTitle =React.createClass({
-	  propTypes:{
-	      title:Reacert.PropTypes.string.isRequired,
-	     }
-	  },
-	  render.function(){
-	  return <h1>{this.prpos.title}
-	  }
-	  
-	  var data =123;
-	  ReacertDOM.render(
-	  <MyTitle title={data} />,
-	  document.body
-      ); 
+    var MyComponent = React.createClass({
+		handleClick: function() {
+		this.refs.myTextInput.focus();
+			},
+		render: function() {
+		return (
+			<div>
+			<input type="text" ref="myTextInput" />
+			<input type="button" value="Focus the text input" onClick={this.handleClick} />
+			</div>
+				);
+			}
+		});
+
+		ReactDOM.render(
+		<MyComponent />,
+		document.getElementById('example')
+		);
     </script>
   </body>
 </html>
