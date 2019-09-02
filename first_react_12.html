@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
+    <!-- 以下引入 react.js, react-dom.js（react 0.14 後將 react-dom 從 react 核心分離，更符合 react 跨平台抽象化的定位）以及 babel-core browser 版 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-dom.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.1/babel.min.js"></script>
+  </head>
+  <body>
+    <!-- 這邊的 id="example" 的 <div> 為 React Component 要插入的地方 -->
+    <div id="example"></div>
+    <!-- 以下就是包在 babel（透過進行語言翻譯）中的 React JSX 語法，babel 會將其轉為瀏覽器看的懂得 JavaScript -->
+    <script type="text/babel"> 
+    class MyForm extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    // 初始化輸入框的 state 值為空
+    this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  // onChange 事件處理函示
+  handleChange(event) {
+    // event.target 是當前的 DOM elment
+    // 從 event.target.value 取得 user 剛輸入的值
+    // 將 user 輸入的值更新回 state
+    this.setState({value: event.target.value});
+  }
+
+  // form onSubmit 事件處理函式
+  handleSubmit(event) {
+    alert('Submit ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    // 將 value 設定為 this.state.value
+    // 並監聽 onChange 來更新 state
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input type="text" value={this.state.value} onChange={this.handleChange} />
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+
+ReactDOM.render(
+  <MyForm />,
+  document.getElementById('example')
+);
+    </script>
+  </body>
+</html>
